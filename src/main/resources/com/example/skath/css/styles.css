@@ -1,0 +1,20 @@
+#vBoxLeft {
+    -fx-background-color: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);
+}
+
+#btnContinue {
+    -fx-background-color: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+#btnContinue:hover {
+    -fx-background-color: linear-gradient(to right, #2b99ea, #193fd8, #01236b);
+    -fx-cursor: hand;
+}
+
+.txtLogin {
+    -fx-background-color: rgba(255, 255, 255, 0.0);
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(0, 0, 0, 1);
+}
