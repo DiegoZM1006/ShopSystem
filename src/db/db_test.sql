@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS db_test;
-CREATE DATABASE db_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE db_test;
+DROP DATABASE IF EXISTS db_mysystem;
+CREATE DATABASE db_mysystem CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE db_mysystem;
 
 -- START: CREATE TABLES
 
