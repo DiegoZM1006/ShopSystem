@@ -1,3 +1,5 @@
+/*  START login.fxml */
+
 #vBoxLeft {
     -fx-background-color: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);
 }
@@ -18,3 +20,37 @@
     -fx-border-width: 0 0 1 0;
     -fx-border-color: rgba(0, 0, 0, 1);
 }
+
+/*  END login.fxml */
+
+/* START sidebar of the all sections */
+
+#sideBar {
+    -fx-background-color: #1A1C1E;
+}
+
+#btnSelected {
+    -fx-background-color: rgba(217, 217, 217, 0.5);
+}
+
+.btnNotSelected {
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.btnNotSelected:hover {
+    -fx-background-color: rgba(217, 217, 217, 0.35);
+}
+
+#btnExit {
+    -fx-background-color: rgba(255, 0, 0, 0.85);
+}
+
+#btnExit:hover {
+    -fx-background-color: rgba(255, 0, 0, 1);
+}
+
+#navBar {
+    -fx-background-color: rgba(30, 30, 30, .7);
+}
+
+/* END sidebar of the all sections */
