@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Screen;
 
 import java.io.IOException;
 
@@ -12,10 +13,10 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        showWindow("login.fxml", "Login");
+        showWindow("login.fxml", "Iniciar Sesion", false ,false);
     }
 
-    public static void showWindow(String fxml, String title){
+    public static void showWindow(String fxml, String title, boolean resizable ,boolean maximized) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(
                     MainApplication.class.getResource(fxml)
@@ -24,7 +25,12 @@ public class MainApplication extends Application {
             Scene scene = new Scene(node);
             Stage window = new Stage();
             window.setTitle(title);
-            window.setResizable(false);
+            window.setResizable(resizable);
+            if(maximized) {
+                window.setWidth(Screen.getScreens().get(0).getBounds().getWidth());
+                window.setHeight(Screen.getScreens().get(0).getBounds().getHeight());
+            }
+            window.setMaximized(maximized);
             window.setScene(scene);
             window.show();
         } catch (IOException ex){
