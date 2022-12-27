@@ -1,6 +1,9 @@
 package com.example.skath.controller;
 
 import com.example.skath.MainApplication;
+import com.example.skath.model.MD5Utils;
+import com.example.skath.model.Singleton;
+import com.example.skath.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.security.MessageDigest;
 
 import java.net.URL;
 import java.sql.*;
@@ -20,19 +24,9 @@ public class MainController implements Initializable {
     @FXML
     private TextField userLbl;
 
-    // Globals var
-    private Connection cn;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            String urlDb = "jdbc:mysql://localhost/db_test";
-            String username = "root";
-            String password = "";
-            cn = DriverManager.getConnection(urlDb, username, password);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
+        Singleton.getInstance();
     }
 
     @FXML
@@ -40,15 +34,22 @@ public class MainController implements Initializable {
 
         if(!userLbl.getText().equals("") && !passwordLbl.getText().equals("")) {
 
-            String query = "SELECT * FROM user  WHERE UserName = ? AND Password = ?";
-            PreparedStatement pstmt = cn.prepareStatement(query);
+            String query = "SELECT * FROM user WHERE USERNAME  = ? COLLATE utf8mb4_bin AND PASSWORD = ?";
+            PreparedStatement pstmt = Singleton.getInstance().getCn().prepareStatement(query);
             pstmt.setString(1, userLbl.getText());
-            pstmt.setString(2, passwordLbl.getText());
+            pstmt.setString(2, MD5Utils.md5(passwordLbl.getText()));
             ResultSet result = pstmt.executeQuery();
 
             if(result.next()) {
-                cn.close();
-                MainApplication.showWindow("index.fxml", "Index");
+
+                Singleton.getInstance().setUser(new User(
+                        result.getInt("ID"),
+                        result.getString("USERNAME"),
+                        result.getString("NAME"),
+                        result.getString("LASTNAME")
+                ));
+                System.out.println("IN");
+                MainApplication.showWindow("dashboard.fxml", "Panel de Administracion", true,true);
                 Stage currentStage = (Stage) userLbl.getScene().getWindow();
                 currentStage.hide();
             } else {

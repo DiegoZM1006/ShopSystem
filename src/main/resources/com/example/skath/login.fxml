@@ -24,7 +24,7 @@
                            <image>
                               <Image url="@images/logo.png" />
                            </image></ImageView>
-                        <Label text="DFMZ" textFill="WHITE" />
+                        <Label text="myStore" textFill="WHITE" />
                      </children>
                      <padding>
                         <Insets left="30.0" />
@@ -40,7 +40,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="www.dfmz.com" textFill="WHITE">
+                  <Label text="www.mystore.com" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="200.0" top="100.0" />
                      </VBox.margin>
