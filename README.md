@@ -10,5 +10,19 @@ See the prototype of the software in this link: https://cutt.ly/y16VHfX
 
 <ul>
   <li> Software prototype : Done ✅ </li>
-  <li> Make the database : In process ⌛ </li>
+  <li> Make the database : Done ✅ </li>
+  <li> Process of each system screen 
+    <ul>
+    <br>
+      <li> Dashboard screen: 5% ⌛ </li>
+      <li> Reports screen: 5% ⌛ </li>
+      <li> Sell screen: 5% ⌛ </li>
+      <li> Inventory screen: 5% ⌛ </li>
+      <li> Packages screen: 5% ⌛ </li>
+      <li> Clients screen: 5% ⌛ </li>
+      <li> Credits screen: 5% ⌛ </li>
+      <li> Configurations screen: 5% ⌛ </li>
+      <li> Users screen: 5% ⌛ </li>
+    </ul>
+  </li>
 </ul>
