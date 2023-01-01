@@ -54,3 +54,29 @@
 }
 
 /* END sidebar of the all sections */
+
+/* START vBox Form of the all sections */
+
+
+.vBoxForm {
+    -fx-background-color: rgb(205, 205, 205);
+}
+
+.btnForm {
+    -fx-background-color: rgba(30, 30, 30, .7);
+    -fx-start-margin: 100;
+}
+
+.headerFormV1 {
+    -fx-background-color: rgba(0, 123, 255, 1);
+}
+
+.headerFormV2 {
+    -fx-background-color: rgba(40, 167, 69, 1);
+}
+
+.headerFormV3 {
+    -fx-background-color: rgba(220, 53, 69, 1);
+}
+
+/* END vBox Form of the all sections */
