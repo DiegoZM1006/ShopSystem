@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.skath.controller.FamilyController">
+   <children>
+      <VBox layoutX="262.0" layoutY="216.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="100.0" styleClass="headerFormV4">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Familias">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <VBox prefHeight="540.0" prefWidth="100.0" spacing="20.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="200.0" spacing="20.0" styleClass="vBoxForm">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="80.0" spacing="10.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label text="ID:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <TextField fx:id="idTF" promptText="ID" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label text="Nombre:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <TextField fx:id="nameTF" promptText="Escribe el nombre aqui" />
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="500.0" spacing="20.0">
+                           <children>
+                              <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSave" styleClass="btnForm" text="Guardar" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/btnLogo/logoSave.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#btnUpdate" styleClass="btnForm" text="Actualizar" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/btnLogo/logoUpdate.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDelete" styleClass="btnForm" text="Eliminar" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/btnLogo/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#btnNew" styleClass="btnForm" text="Nuevo" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/btnLogo/logoNew.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </HBox>
+                  <TableView fx:id="table">
+                    <columns>
+                      <TableColumn fx:id="ID" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="name" prefWidth="684.0" text="Nombre" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
