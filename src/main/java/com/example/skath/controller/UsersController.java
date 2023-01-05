@@ -59,7 +59,7 @@ public class UsersController implements Initializable {
 
     @FXML
     void btnCredits(ActionEvent event) {
-        btnShowWindow("clients.fxml", "Cobranza");
+        btnShowWindow("credits.fxml", "Cobranza");
     }
 
     @FXML

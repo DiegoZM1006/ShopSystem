@@ -8,4 +8,6 @@ module com.example.skath {
     exports com.example.skath;
     exports com.example.skath.controller;
     opens com.example.skath.controller to javafx.fxml;
+    opens com.example.skath.model to javafx.base;
+    exports com.example.skath.model;
 }
