@@ -97,7 +97,7 @@ public class FamilyController implements Initializable {
         manageEvents();
 
         // Cerramos la conexion
-        cn.close();
+        Singleton.getInstance().closeCn();
 
     }
 
@@ -145,7 +145,7 @@ public class FamilyController implements Initializable {
         }
 
         // Cerramos la conexion
-        cn.close();
+        Singleton.getInstance().closeCn();
 
     }
 
@@ -154,7 +154,6 @@ public class FamilyController implements Initializable {
         idTF.setText(null);
         nameTF.setText(null);
 
-        table.
 
         btnSave.setDisable(false);
         btnUpdate.setDisable(true);
@@ -185,7 +184,7 @@ public class FamilyController implements Initializable {
             }
 
             // Cerramos la conexion
-            cn.close();
+            Singleton.getInstance().closeCn();
 
         } else {
             Alerts.warning("Error", "Rellena todos los campos");
@@ -219,9 +218,11 @@ public class FamilyController implements Initializable {
                 Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se actualizo");
             }
 
+            // Cerramos la conexion
+            Singleton.getInstance().closeCn();
+
         } else {
             Alerts.warning("Error", "Rellena todos los campos");
-
         }
 
     }
