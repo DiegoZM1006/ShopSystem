@@ -26,10 +26,6 @@ public class MainApplication extends Application {
             Stage window = new Stage();
             window.setTitle(title);
             window.setResizable(resizable);
-            if(maximized) {
-                window.setWidth(Screen.getScreens().get(0).getBounds().getWidth());
-                window.setHeight(Screen.getScreens().get(0).getBounds().getHeight());
-            }
             window.setMaximized(maximized);
             window.setScene(scene);
             window.show();
