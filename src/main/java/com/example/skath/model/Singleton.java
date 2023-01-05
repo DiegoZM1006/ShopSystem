@@ -2,6 +2,7 @@ package com.example.skath.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Singleton {
 
@@ -17,7 +18,7 @@ public class Singleton {
     public static Singleton getInstance() {
         if(instance == null) {
             instance = new Singleton();
-            instance.connectionToDB();
+            // instance.connectionToDB();
         }
         return instance;
     }
@@ -34,7 +35,12 @@ public class Singleton {
     }
 
     public Connection getCn() {
+        connectionToDB();
         return cn;
+    }
+
+    public void closeCn() throws SQLException {
+        cn.close();
     }
 
     public void setCn(Connection cn) {
