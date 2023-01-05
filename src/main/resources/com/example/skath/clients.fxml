@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="766.0" prefWidth="1366.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.skath.controller.ClientsController">
+<AnchorPane prefHeight="718.0" prefWidth="1366.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.skath.controller.ClientsController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -221,7 +221,7 @@
             </VBox>
             <VBox prefWidth="1166.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox id="navBar" alignment="CENTER_LEFT" maxWidth="1366.0" prefHeight="50.0" spacing="20.0">
+                  <HBox id="navBar" alignment="CENTER_LEFT" prefHeight="50.0" spacing="20.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#btnMenu" styleClass="btnNotSelected">
                            <graphic>
