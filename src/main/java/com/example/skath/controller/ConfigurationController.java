@@ -1,6 +1,7 @@
 package com.example.skath.controller;
 
 import com.example.skath.MainApplication;
+import com.example.skath.model.Alerts;
 import com.example.skath.model.MD5Utils;
 import com.example.skath.model.Singleton;
 import javafx.event.ActionEvent;
@@ -54,6 +55,10 @@ public class ConfigurationController implements Initializable {
     @FXML
     private TextField streetAddressTF;
 
+    // Connection var
+
+    private Connection cn;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnMenu(new ActionEvent());
@@ -62,7 +67,7 @@ public class ConfigurationController implements Initializable {
         try {
             callData();
         } catch (SQLException e) {
-            methAlert("Error", "Se presento un ERROR en el sistema", "Error");
+            Alerts.error("Upps, error de conexion", "Comprueba que tienes conexion a la base de datos");
             throw new RuntimeException(e);
         }
 
@@ -70,8 +75,11 @@ public class ConfigurationController implements Initializable {
 
     void callData() throws SQLException {
 
+        // Establecemos la conexion
+        cn = Singleton.getInstance().getCn();
+
         String query = "SELECT * FROM user WHERE ID = ?";
-        PreparedStatement pstmt = Singleton.getInstance().getCn().prepareStatement(query);
+        PreparedStatement pstmt = cn.prepareStatement(query);
         pstmt.setInt(1, Singleton.getInstance().getUser().getID());
         ResultSet result = pstmt.executeQuery();
 
@@ -82,7 +90,7 @@ public class ConfigurationController implements Initializable {
         usernameTF.setText(result.getString("USERNAME"));
 
         query = "SELECT * FROM store";
-        pstmt = Singleton.getInstance().getCn().prepareStatement(query);
+        pstmt = cn.prepareStatement(query);
         result = pstmt.executeQuery();
 
         result.next();
@@ -90,6 +98,9 @@ public class ConfigurationController implements Initializable {
         nameStoreTF.setText(result.getString("NAME"));
         phoneNumberTF.setText(result.getString("PHONE_NUMBER"));
         streetAddressTF.setText(result.getString("STREET_ADDRESS"));
+
+        // Cerramos la conexion
+        Singleton.getInstance().closeCn();
 
     }
 
@@ -104,32 +115,27 @@ public class ConfigurationController implements Initializable {
         MainApplication.showWindow(fxml, title, true,true);
         Stage currentStage = (Stage) sideBar.getScene().getWindow();
         currentStage.hide();
-    }
 
-    public void methAlert(String alertType, String title, String msg) {
-
-        Alert alert = new Alert(Alert.AlertType.NONE);
-
-        if(alertType.equals("Error")) {
-            alert = new Alert(Alert.AlertType.ERROR);
-        } else if(alertType.equals("Info")) {
-            alert = new Alert(Alert.AlertType.INFORMATION);
-        }
-
-        alert.setHeaderText(null);
-        alert.setTitle(title);
-        alert.setContentText(msg);
-        alert.showAndWait();
     }
 
     int updateDataFormProfile(String username, String name, String lastname, int ID) throws SQLException {
+
+        // Establecemos la conexion
+        cn = Singleton.getInstance().getCn();
+
         String query = "UPDATE user SET USERNAME = ?, NAME = ?, LASTNAME = ? WHERE ID = ?";
-        PreparedStatement pstmt = Singleton.getInstance().getCn().prepareStatement(query);
+        PreparedStatement pstmt = cn.prepareStatement(query);
         pstmt.setString(1, username);
         pstmt.setString(2, name);
         pstmt.setString(3, lastname);
         pstmt.setInt(4, ID);
-        return pstmt.executeUpdate();
+        int result = pstmt.executeUpdate();
+
+        // Cerramos la conexion
+        Singleton.getInstance().closeCn();
+
+        return result;
+
     }
 
     // Buttons actions forms
@@ -140,9 +146,12 @@ public class ConfigurationController implements Initializable {
         // Compruebo si relleno todos los campos del formulario
         if(!nameTF.getText().equals("") && !lastnameTF.getText().equals("") && !usernameTF.getText().equals("")) {
 
+            // Establecemos la conexion
+            cn = Singleton.getInstance().getCn();
+
             // Hacemos un llamado a la base de datos con el ID del usuario que ingreso en el sistema
             String query = "SELECT count(*) as REGISTROS FROM user WHERE ID = ?";
-            PreparedStatement pstmt = Singleton.getInstance().getCn().prepareStatement(query);
+            PreparedStatement pstmt = cn.prepareStatement(query);
             pstmt.setInt(1, Singleton.getInstance().getUser().getID());
             ResultSet result = pstmt.executeQuery();
             result.next();
@@ -151,11 +160,7 @@ public class ConfigurationController implements Initializable {
             if(result.getInt("REGISTROS") == 1) {
 
                 // Muestro una alerta de confirmacion, para validar si el usuario quiere realizar los cambios
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText(null);
-                alert.setTitle("Confirmacion de actualizacion de datos de usuario");
-                alert.setContentText("¿Esta usted seguro de actualizar los datos de su perfil?");
-                Optional<ButtonType> resultConfirmation = alert.showAndWait();
+                Optional<ButtonType> resultConfirmation = Alerts.confirmation("Confirmacion de actualizacion de datos de usuario", "¿Esta usted seguro de actualizar los datos de su perfil?");
 
                 // Si el boton pulsado fue el de "aceptar" actualizara la base de datos con los datos puestos en los campos del formulario
                 if(resultConfirmation.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
@@ -163,22 +168,25 @@ public class ConfigurationController implements Initializable {
 
                     // Validamos si la base de datos si fue actualizada
                     if(update > 0) {
-                        methAlert("Info", "Perfil actualizado", "Los datos fueron CORRECTAMENTE actualizados");
+                        Alerts.info("Perfil actualizado", "Los datos fueron CORRECTAMENTE actualizados");
                     } else {
-                        methAlert("Error", "Upps, hubo un error", "Ocurrio un error en el sistema, los datos no se actualizaron");
+                        Alerts.error("Upps, hubo un error", "Ocurrio un error en el sistema, los datos no se actualizaron");
                     }
 
                 } else {
-                    methAlert("Error", "Proceso Cancelado", "Los datos de tu perfil no fueron actualizados");
+                    Alerts.warning("Proceso Cancelado", "Los datos de tu perfil no fueron actualizados");
                     btnShowWindow("configuration.fxml", "Configuracion");
                 }
 
             } else {
-                methAlert("Error", "Upps, hubo un error", "El usuario no se encontro en el sistema");
+                Alerts.error("Upps, hubo un error", "El usuario no se encontro en el sistema");
             }
 
+            // Cerramos la conexion
+            Singleton.getInstance().closeCn();
+
         } else {
-            methAlert("Error","Error", "Rellena todos los campos para guardar los cambios");
+            Alerts.warning("Error", "Rellena todos los campos");
         }
 
     }
@@ -189,12 +197,15 @@ public class ConfigurationController implements Initializable {
         // Compruebo si relleno todos los campos del formulario
         if(!actualPasswordTF.getText().equals("") && !newPasswordTF.getText().equals("") && !repeatNewPasswordTF.getText().equals("")) {
 
+            // Establecemos la conexion
+            cn = Singleton.getInstance().getCn();
+
             // Compruebo si los campos de la nueva contrasñea coinciden
             if(newPasswordTF.getText().equals(repeatNewPasswordTF.getText())) {
 
                 // Hago un llamado a la base de datos para traer los datos del usuario
                 String query = "SELECT * FROM user WHERE ID = ? and PASSWORD = ?";
-                PreparedStatement pstmt = Singleton.getInstance().getCn().prepareStatement(query);
+                PreparedStatement pstmt = cn.prepareStatement(query);
                 pstmt.setInt(1, Singleton.getInstance().getUser().getID());
                 pstmt.setString(2, MD5Utils.md5(actualPasswordTF.getText()));
                 ResultSet result = pstmt.executeQuery();
@@ -203,18 +214,14 @@ public class ConfigurationController implements Initializable {
                 if(result.next()) {
 
                     // Muestro una alerta de confirmacion, para ver si el usuario quiere cambiar su contraseña
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setHeaderText(null);
-                    alert.setTitle("Confirmacion de cambio de contraseña");
-                    alert.setContentText("¿Esta usted seguro de actualizar la contraseña?");
-                    Optional<ButtonType> resultConfirmation = alert.showAndWait();
+                    Optional<ButtonType> resultConfirmation = Alerts.confirmation("Confirmacion de cambio de contraseña", "¿Esta usted seguro de actualizar la contraseña?");
 
                     // Si el boton pulsado fue "aceptar" el sistema realizara el cambio de la contraseña
                     if(resultConfirmation.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-                        methAlert("Info", "Contraseña cambiada", "La contraseña fue CORRECTAMENTE cambiada");
+                        Alerts.info("Contraseña cambiada", "La contraseña fue CORRECTAMENTE cambiada");
 
                         query = "UPDATE user SET PASSWORD = ? WHERE ID = ?";
-                        pstmt = Singleton.getInstance().getCn().prepareStatement(query);
+                        pstmt = cn.prepareStatement(query);
                         pstmt.setString(1, MD5Utils.md5(newPasswordTF.getText()));
                         pstmt.setInt(2, Singleton.getInstance().getUser().getID());
                         int newResult = pstmt.executeUpdate();
@@ -224,7 +231,7 @@ public class ConfigurationController implements Initializable {
                         repeatNewPasswordTF.setText("");
 
                     } else {
-                        methAlert("Error", "Proceso Cancelado", "La contraseña no fue actualizada");
+                        Alerts.warning("Proceso Cancelado", "La contraseña no fue actualizada");
 
                         actualPasswordTF.setText("");
                         newPasswordTF.setText("");
@@ -233,15 +240,18 @@ public class ConfigurationController implements Initializable {
                     }
 
                 } else {
-                    methAlert("Error", "Error en la contraseña", "La contraseña actual es incorrecta");
+                    Alerts.error("Error en la contraseña", "La contraseña actual es incorrecta");
                 }
 
             } else {
-                methAlert("Error","Error en coincidencia", "El campo (nueva contraseña) no coincide con el campo (repetir nueva contraseña)");
+                Alerts.warning("Error en coincidencia", "El campo (nueva contraseña) no coincide con el campo (repetir nueva contraseña)");
             }
 
+            // Cerramos la conexion
+            Singleton.getInstance().closeCn();
+
         } else {
-            methAlert("Error","Error", "Rellena todos los campos para actualizar la contraseña");
+            Alerts.warning("Error", "Rellena todos los campos");
         }
 
     }
@@ -252,39 +262,53 @@ public class ConfigurationController implements Initializable {
         // Compruebo si relleno todos los campos del formulario
         if(!nameStoreTF.getText().equals("") && !phoneNumberTF.getText().equals("") && !streetAddressTF.getText().equals("")) {
 
+            // Establecemos la conexion
+            cn = Singleton.getInstance().getCn();
+
             // Muestro una alerta de confirmacion
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText(null);
-            alert.setTitle("Confirmacion de actualizacion datos de la tienda");
-            alert.setContentText("¿Esta usted seguro de actualizar los datos de la tienda?");
-            Optional<ButtonType> resultConfirmation = alert.showAndWait();
+            Optional<ButtonType> resultConfirmation = Alerts.confirmation("Confirmacion de actualizacion datos de la tienda", "¿Esta usted seguro de actualizar los datos de la tienda?");
 
             // Si el boton pulsado fue "aceptar" el sistema realizara el cambio de los datos de la tienda
             if(resultConfirmation.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
 
                 String query = "UPDATE store SET NAME = ?, PHONE_NUMBER = ?, STREET_ADDRESS = ? WHERE ID = 1";
-                PreparedStatement pstmt = Singleton.getInstance().getCn().prepareStatement(query);
+                PreparedStatement pstmt = cn.prepareStatement(query);
                 pstmt.setString(1, nameStoreTF.getText());
                 pstmt.setString(2, phoneNumberTF.getText());
                 pstmt.setString(3, streetAddressTF.getText());
                 int result = pstmt.executeUpdate();
 
                 if(result > 0) {
-                    methAlert("Info", "Datos actualizados", "Los datos de la tienda fueron CORRECTAMENTE actualizados");
+                    Alerts.info("Datos actualizados", "Los datos de la tienda fueron CORRECTAMENTE actualizados");
                 } else {
-                    methAlert("Error", "Error inesperado", "Los datos de la tienda NO fueron actualizados");
+                    Alerts.error("Error inesperado", "Los datos de la tienda NO fueron actualizados");
                     btnShowWindow("configuration.fxml", "Configuracion");
                 }
 
             } else {
-                methAlert("Error", "Proceso Cancelado", "Los datos de la tienda no fueron actualizados");
+                Alerts.warning("Proceso Cancelado", "Los datos de la tienda no fueron actualizados");
                 btnShowWindow("configuration.fxml", "Configuracion");
             }
 
+            // Cerramos la conexion
+            Singleton.getInstance().closeCn();
+
         } else {
-            methAlert("Error","Error", "Rellena todos los campos del formulario");
+            Alerts.warning("Error", "Rellena todos los campos");
         }
 
+    }
+
+    // Buttons more configurations (Product's family and Storage)
+
+    @FXML
+    void btnFamily(ActionEvent event) {
+        MainApplication.showWindow("family.fxml", "Familias de productos", false,false);
+    }
+
+    @FXML
+    void btnStorage(ActionEvent event) {
+        MainApplication.showWindow("storage.fxml", "Almacenes", false,false);
     }
 
     // Buttons actions sideBar

@@ -461,7 +461,7 @@
                               </VBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                                  <children>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="btnForm" text="FAMILIAS" textFill="WHITE">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#btnFamily" styleClass="btnForm" text="FAMILIAS" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -476,7 +476,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="btnForm" text="ALMACENES" textFill="WHITE">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#btnStorage" styleClass="btnForm" text="ALMACENES" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
