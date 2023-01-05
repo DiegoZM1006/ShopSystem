@@ -79,4 +79,8 @@
     -fx-background-color: rgba(220, 53, 69, 1);
 }
 
+.headerFormV4 {
+    -fx-background-color: rgba(30, 30, 30, .7);
+}
+
 /* END vBox Form of the all sections */
