@@ -11,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import java.security.MessageDigest;
 
 import java.net.URL;
 import java.sql.*;
@@ -34,8 +33,11 @@ public class MainController implements Initializable {
 
         if(!userLbl.getText().equals("") && !passwordLbl.getText().equals("")) {
 
+            // Establecemos la conexion
+            Connection cn = Singleton.getInstance().getCn();
+
             String query = "SELECT * FROM user WHERE USERNAME  = ? COLLATE utf8mb4_bin AND PASSWORD = ?";
-            PreparedStatement pstmt = Singleton.getInstance().getCn().prepareStatement(query);
+            PreparedStatement pstmt = cn.prepareStatement(query);
             pstmt.setString(1, userLbl.getText());
             pstmt.setString(2, MD5Utils.md5(passwordLbl.getText()));
             ResultSet result = pstmt.executeQuery();
@@ -48,18 +50,19 @@ public class MainController implements Initializable {
                         result.getString("NAME"),
                         result.getString("LASTNAME")
                 ));
-                System.out.println("IN");
                 MainApplication.showWindow("dashboard.fxml", "Panel de Administracion", true,true);
                 Stage currentStage = (Stage) userLbl.getScene().getWindow();
                 currentStage.hide();
             } else {
-                methAlert("Error", "Wrong password or username");
+                methAlert("Error, usuario no encontrado", "Contraseña o usuario incorrecto");
             }
 
-        } else {
-            methAlert("Error", "Complete all the fields");
-        }
+            // Cerramos la conexion
+            Singleton.getInstance().closeCn();
 
+        } else {
+            methAlert("Error", "Completa todos los campos");
+        }
     }
 
     public void methAlert(String title, String msg) {
