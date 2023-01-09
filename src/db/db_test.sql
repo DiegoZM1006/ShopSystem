@@ -140,8 +140,6 @@ ALTER TABLE `USER_PERMIT` ADD FOREIGN KEY (ID_PERMIT) REFERENCES PERMIT(ID);
 
 INSERT INTO `STORE` (`NAME`, `PHONE_NUMBER`, `STREET_ADDRESS`)  values ('Kath Urban Style', '0962750018', 'XXXXXXXXXXXXXXX');
 
-INSERT INTO `FAMILY` (`NAME`) values  ('ZAPATOS');
-
 INSERT INTO `USER` (`ID`,`USERNAME`, `NAME`, `LASTNAME`, `PASSWORD`) VALUES (1, 'admin', 'Diego', 'Mueses', '21232f297a57a5a743894a0e4a801fc3');
 
 INSERT INTO `PERMIT` (`ID`, `NAME`) values (1, 'Dashboard'), (2, 'Reports'), (3, 'Sell'), (4, 'Inventory'), (5, 'Packages')
