@@ -21,7 +21,7 @@ See the prototype of the software in this link: https://cutt.ly/y16VHfX
       <li> Packages screen: 5% ⌛ </li>
       <li> Clients screen: 5% ⌛ </li>
       <li> Credits screen: 5% ⌛ </li>
-      <li> Configurations screen: 80% ⌛ </li>
+      <li> Configurations screen: 100% ✅ </li>
       <li> Users screen: 5% ⌛ </li>
     </ul>
   </li>
