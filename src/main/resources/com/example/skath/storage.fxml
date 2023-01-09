@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -75,6 +76,9 @@
                                  <font>
                                     <Font size="14.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#btnUpdate" styleClass="btnForm" text="Actualizar" textFill="WHITE">
                                  <graphic>
@@ -87,6 +91,9 @@
                                  <font>
                                     <Font size="14.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDelete" styleClass="btnForm" text="Eliminar" textFill="WHITE">
                                  <graphic>
@@ -99,6 +106,9 @@
                                  <font>
                                     <Font size="14.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button mnemonicParsing="false" onAction="#btnNew" styleClass="btnForm" text="Nuevo" textFill="WHITE">
                                  <graphic>
@@ -111,6 +121,9 @@
                                  <font>
                                     <Font size="14.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                            </children>
                         </HBox>
