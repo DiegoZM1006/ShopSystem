@@ -10,6 +10,7 @@ public class Singleton {
     private Connection cn;
     private User user;
     private boolean isSideBarCollapsed;
+    private int idToScreenPermits;
 
     private Singleton() {
         isSideBarCollapsed = false;
@@ -41,6 +42,14 @@ public class Singleton {
 
     public void closeCn() throws SQLException {
         cn.close();
+    }
+
+    public int getIdToScreenPermits() {
+        return idToScreenPermits;
+    }
+
+    public void setIdToScreenPermits(int idToScreenPermits) {
+        this.idToScreenPermits = idToScreenPermits;
     }
 
     public void setCn(Connection cn) {
