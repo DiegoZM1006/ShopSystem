@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefWidth="800.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.skath.controller.PermitsController">
+   <children>
+      <VBox layoutX="262.0" layoutY="216.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="100.0" styleClass="headerFormV4">
+               <children>
+                  <Text fx:id="title" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Permisos de: username">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <VBox prefHeight="540.0" prefWidth="100.0" spacing="20.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <VBox spacing="20.0" styleClass="vBoxForm">
+                     <children>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <CheckBox fx:id="dashboardCB" mnemonicParsing="false" text="Panel de administracion">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="reportsCB" mnemonicParsing="false" text="Reportes">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <CheckBox fx:id="sellCB" mnemonicParsing="false" text="Vender">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="inventoryCB" mnemonicParsing="false" text="Inventario">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="packagesCB" mnemonicParsing="false" text="Paquetes">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <CheckBox fx:id="clientsCB" mnemonicParsing="false" text="Clientes">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="creditsCB" mnemonicParsing="false" text="Cobranza">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <CheckBox fx:id="usersCB" mnemonicParsing="false" text="Usuarios">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="configurationCB" mnemonicParsing="false" text="Configuracion">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="500.0" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnSave" styleClass="btnForm" text="Guardar" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/btnLogo/logoSave.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
