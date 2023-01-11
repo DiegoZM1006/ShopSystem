@@ -22,7 +22,7 @@ See the prototype of the software in this link: https://cutt.ly/y16VHfX
       <li> Clients screen: 5% ⌛ </li>
       <li> Credits screen: 5% ⌛ </li>
       <li> Configurations screen: 100% ✅ </li>
-      <li> Users screen: 5% ⌛ </li>
+      <li> Users screen: 100% ✅ </li>
     </ul>
   </li>
 </ul>
