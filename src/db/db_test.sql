@@ -20,8 +20,7 @@ CREATE TABLE `PRODUCT` (
     `ID` int(11) NOT NULL,
     `ID_STORE` int(11) NOT NULL,
     `ID_FAMILY` int(11) NOT NULL,
-    `NAME` varchar(50) NOT NULL,
-    `CODE` varchar(50) NOT NULL,
+    `DESCRIPTION` varchar(100) NOT NULL,
     `PRICE` double(10, 2) NOT NULL,
     `AMOUNT` int(11) NOT NULL
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
