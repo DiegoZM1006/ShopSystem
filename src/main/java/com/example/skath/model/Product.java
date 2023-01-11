@@ -3,16 +3,16 @@ package com.example.skath.model;
 public class Product {
 
     private int ID;
-    private int ID_STORE;
-    private int ID_FAMILY;
+    private Storage storage;
+    private Family family;
     private String description;
     private double price;
     private int amount;
 
-    public Product(int ID, int ID_STORE, int ID_FAMILY, String description, double price, int amount) {
+    public Product(int ID, Storage storage, Family family, String description, double price, int amount) {
         this.ID = ID;
-        this.ID_STORE = ID_STORE;
-        this.ID_FAMILY = ID_FAMILY;
+        this.storage = storage;
+        this.family = family;
         this.description = description;
         this.price = price;
         this.amount = amount;
@@ -26,20 +26,20 @@ public class Product {
         this.ID = ID;
     }
 
-    public int getID_STORE() {
-        return ID_STORE;
+    public Storage getStorage() {
+        return storage;
     }
 
-    public void setID_STORE(int ID_STORE) {
-        this.ID_STORE = ID_STORE;
+    public void setStorage(Storage storage) {
+        this.storage = storage;
     }
 
-    public int getID_FAMILY() {
-        return ID_FAMILY;
+    public Family getFamily() {
+        return family;
     }
 
-    public void setID_FAMILY(int ID_FAMILY) {
-        this.ID_FAMILY = ID_FAMILY;
+    public void setFamily(Family family) {
+        this.family = family;
     }
 
     public String getDescription() {
