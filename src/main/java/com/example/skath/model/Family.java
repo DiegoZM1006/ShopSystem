@@ -2,10 +2,8 @@ package com.example.skath.model;
 
 public class Family {
 
-    // Error problable los atributos tienen que ser publicos
-
-    public int id;
-    public String name;
+    private int id;
+    private String name;
 
     public Family(int id, String name) {
         this.id = id;
