@@ -2,10 +2,8 @@ package com.example.skath.model;
 
 public class Storage {
 
-    // Error problable los atributos tienen que ser publicos
-
-    public int id;
-    public String name;
+    private int id;
+    private String name;
 
     public Storage(int id, String name) {
         this.id = id;
@@ -26,6 +24,11 @@ public class Storage {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }
