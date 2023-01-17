@@ -84,3 +84,7 @@
 }
 
 /* END vBox Form of the all sections */
+
+.boxTotal {
+    -fx-background-color: rgba(64, 233, 37, .4);
+}
