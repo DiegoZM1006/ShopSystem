@@ -224,7 +224,7 @@
             </VBox>
             <VBox prefWidth="1166.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox id="navBar" alignment="CENTER_LEFT" prefHeight="50.0" spacing="20.0">
+                  <HBox id="navBar" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" spacing="20.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#btnMenu" styleClass="btnNotSelected">
                            <graphic>

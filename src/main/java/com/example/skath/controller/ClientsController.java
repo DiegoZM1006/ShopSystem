@@ -108,6 +108,7 @@ public class ClientsController implements Initializable {
         Singleton.getInstance().closeCn();
 
     }
+
     void manageEvents(){
         table.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, prevValue, selectedValue) -> {
