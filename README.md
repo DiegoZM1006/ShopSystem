@@ -17,9 +17,9 @@ See the prototype of the software in this link: https://cutt.ly/y16VHfX
       <li> Dashboard screen: 5% ⌛ </li>
       <li> Reports screen: 5% ⌛ </li>
       <li> Sell screen: 5% ⌛ </li>
-      <li> Inventory screen: 5% ⌛ </li>
+      <li> Inventory screen: 85% ⌛ </li>
       <li> Packages screen: 5% ⌛ </li>
-      <li> Clients screen: 5% ⌛ </li>
+      <li> Clients screen: 100% ✅ </li>
       <li> Credits screen: 5% ⌛ </li>
       <li> Configurations screen: 100% ✅ </li>
       <li> Users screen: 100% ✅ </li>
