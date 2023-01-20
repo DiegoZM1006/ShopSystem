@@ -75,7 +75,8 @@ CREATE TABLE `SALES_DETAIL` (
     `ID_PRODUCT` int(11) NOT NULL,
     `ID_SALES` int(11) NOT NULL,
     `AMOUNT` int(11) NOT NULL,
-    `PRICE` double(10, 2) NOT NULL
+    `PRICE` double(10, 2) NOT NULL,
+    `TOTAL_PRICE` double(10, 2) NOT NULL
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci ;
 
 -- END: CREATE TABLE
