@@ -4,10 +4,16 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -221,7 +227,7 @@
             </VBox>
             <VBox prefWidth="1166.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox id="navBar" alignment="CENTER_LEFT" prefHeight="50.0" spacing="20.0">
+                  <HBox id="navBar" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" spacing="20.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#btnMenu" styleClass="btnNotSelected">
                            <graphic>
@@ -242,6 +248,297 @@
                         <Insets left="20.0" right="30.0" />
                      </padding>
                   </HBox>
+                  <VBox prefHeight="688.0" spacing="20.0" VBox.vgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <HBox spacing="20.0" styleClass="vBoxForm">
+                           <padding>
+                              <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <Button fx:id="btnSelClient" mnemonicParsing="false" onAction="#btnSelClient" prefWidth="200.0" styleClass="btnForm" text="Sel. Cliente" textFill="WHITE">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/btnLogo/logoClients.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Label text="Nombre del cliente:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="nameClientTF" promptText="Nombre del cliente" />
+                                 </children>
+                              </VBox>
+                              <VBox prefWidth="200.0" spacing="5.0">
+                                 <children>
+                                    <Button fx:id="btnSelProduct" mnemonicParsing="false" onAction="#btnSelProduct" prefWidth="200.0" styleClass="btnForm" text="Sel. Producto" textFill="WHITE">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/btnLogo/logoConfigurations.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Label text="Codigo del producto:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="productCodeTF" promptText="Codigo del producto" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="BOTTOM_LEFT" spacing="5.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Precio:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <TextField fx:id="priceTF" promptText="Escribe el precio" />
+                                    <VBox>
+                                       <children>
+                                          <Label text=" Cantidad:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="amountTF" promptText="Escribe la cantidad" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="BOTTOM_LEFT" spacing="5.0" />
+                              <HBox alignment="CENTER_RIGHT" spacing="20.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="btnAddProduct" mnemonicParsing="false" onAction="#btnAddProduct" styleClass="btnForm" text="Añadir" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/btnLogo/logoAdd.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="btnUpdateProduct" mnemonicParsing="false" onAction="#btnUpdateProduct" styleClass="btnForm" text="Actualizar" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/btnLogo/logoUpdate.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="btnDeleteProduct" mnemonicParsing="false" onAction="#btnDeleteProduct" styleClass="btnForm" text="Eliminar" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@images/btnLogo/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="ID" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="description" prefWidth="850.0" text="Nombre del producto" />
+                              <TableColumn fx:id="price" prefWidth="100.0" text="Precio" />
+                              <TableColumn fx:id="amount" prefWidth="100.0" text="Cantidad" />
+                          </columns>
+                        </TableView>
+                        <GridPane prefHeight="114.0" prefWidth="1126.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" spacing="20.0" styleClass="vBoxForm" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label text="TOTAL:">
+                                       <font>
+                                          <Font size="64.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox alignment="CENTER_RIGHT" prefWidth="250.0" styleClass="boxTotal">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" spacing="5.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label text="\$">
+                                                   <font>
+                                                      <Font size="48.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="total" text="0.0" HBox.hgrow="ALWAYS">
+                                                   <font>
+                                                      <Font size="48.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets right="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="vBoxForm">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <Label text="Nombre del cliente:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="clientSelected" text="Sin seleccionar">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <Label text="Nombre del vendedor:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="vendorSelected" text="Sin seleccionar">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <Label text="Fecha:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="currentDate" text="00/00/0000">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="20.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </GridPane>
+                        <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                           <children>
+                              <Button fx:id="btnSell" mnemonicParsing="false" onAction="#btnSell" styleClass="btnForm" text="Vender" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/btnLogo/logoSell.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#btnDeleteSell" styleClass="btnForm" text="Eliminar Venta" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/btnLogo/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="70.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>
