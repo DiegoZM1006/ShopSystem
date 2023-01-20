@@ -6,12 +6,17 @@ import com.example.skath.model.MD5Utils;
 import com.example.skath.model.Singleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.xml.transform.Result;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.Optional;
@@ -303,12 +308,42 @@ public class ConfigurationController implements Initializable {
 
     @FXML
     void btnFamily(ActionEvent event) {
-        MainApplication.showWindow("family.fxml", "Familias de productos", false,false);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainApplication.class.getResource("family.fxml")
+            );
+            Parent node = fxmlLoader.load();
+            Scene scene = new Scene(node);
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("Familias de productos");
+            window.setResizable(false);
+            window.setMaximized(false);
+            window.setScene(scene);
+            window.showAndWait();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     void btnStorage(ActionEvent event) {
-        MainApplication.showWindow("storage.fxml", "Almacenes", false,false);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainApplication.class.getResource("storage.fxml")
+            );
+            Parent node = fxmlLoader.load();
+            Scene scene = new Scene(node);
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("Almacenes");
+            window.setResizable(false);
+            window.setMaximized(false);
+            window.setScene(scene);
+            window.showAndWait();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     // Buttons actions sideBar
