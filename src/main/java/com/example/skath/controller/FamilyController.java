@@ -132,14 +132,9 @@ public class FamilyController implements Initializable {
         cn.close();
 
         if(result == 1) {
-
             Alerts.info("Registro eliminado", "El registro fue EXITOSAMENTE eliminado");
-
-
-            MainApplication.showWindow("family.fxml", "Familias de productos", false,false);
-            Stage currentStage = (Stage) table.getScene().getWindow();
-            currentStage.hide();
-
+            callData();
+            btnNew(new ActionEvent());
         } else {
             Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se elimino");
         }
@@ -175,10 +170,8 @@ public class FamilyController implements Initializable {
 
             if(result == 1) {
                 Alerts.info("Registro agregado", "El registro fue EXITOSAMENTE agregado");
-
-                MainApplication.showWindow("family.fxml", "Familias de productos", false,false);
-                Stage currentStage = (Stage) table.getScene().getWindow();
-                currentStage.hide();
+                callData();
+                btnNew(new ActionEvent());
             } else {
                 Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se guardo");
             }
@@ -207,13 +200,9 @@ public class FamilyController implements Initializable {
             int result = pstmt.executeUpdate();
 
             if(result == 1) {
-
                 Alerts.info("Registro actualizado", "El registro fue EXITOSAMENTE actualizado");
-
-                MainApplication.showWindow("family.fxml", "Familias de productos", false,false);
-                Stage currentStage = (Stage) table.getScene().getWindow();
-                currentStage.hide();
-
+                callData();
+                btnNew(new ActionEvent());
             } else {
                 Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se actualizo");
             }
