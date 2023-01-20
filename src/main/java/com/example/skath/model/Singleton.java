@@ -1,5 +1,8 @@
 package com.example.skath.model;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,6 +14,10 @@ public class Singleton {
     private User user;
     private boolean isSideBarCollapsed;
     private int idToScreenPermits;
+    private Client clientToFastClient;
+    private Product productToFastProduct;
+    private ObservableList<Product> obsProducts;
+    private double totalPayment;
 
     private Singleton() {
         isSideBarCollapsed = false;
@@ -31,6 +38,7 @@ public class Singleton {
             String password = "";
             cn = DriverManager.getConnection(urlDb, username, password);
         } catch(Exception e) {
+            Alerts.error("Error de conexion", "Hubo un error de conexion, por favor conectate");
             System.out.println(e.getMessage());
         }
     }
@@ -76,4 +84,35 @@ public class Singleton {
         isSideBarCollapsed = sideBarCollapsed;
     }
 
+    public Client getClientToFastClient() {
+        return clientToFastClient;
+    }
+
+    public void setClientToFastClient(Client clientToFastClient) {
+        this.clientToFastClient = clientToFastClient;
+    }
+
+    public Product getProductToFastProduct() {
+        return productToFastProduct;
+    }
+
+    public void setProductToFastProduct(Product productToFastProduct) {
+        this.productToFastProduct = productToFastProduct;
+    }
+
+    public ObservableList<Product> getObsProducts() {
+        return obsProducts;
+    }
+
+    public void setObsProducts(ObservableList<Product> obsProducts) {
+        this.obsProducts = obsProducts;
+    }
+
+    public double getTotalPayment() {
+        return totalPayment;
+    }
+
+    public void setTotalPayment(double totalPayment) {
+        this.totalPayment = totalPayment;
+    }
 }
