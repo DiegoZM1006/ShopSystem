@@ -409,7 +409,7 @@
                         </TableView>
                         <GridPane prefHeight="114.0" prefWidth="1126.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                           </columnConstraints>
                           <rowConstraints>
@@ -446,7 +446,7 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="vBoxForm">
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="407.0" spacing="10.0" styleClass="vBoxForm">
                                  <children>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
@@ -455,7 +455,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="clientSelected" text="Sin seleccionar">
+                                          <Label fx:id="clientSelected" text="Sin seleccionar" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -469,7 +469,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="vendorSelected" text="Sin seleccionar">
+                                          <Label fx:id="vendorSelected" text="Sin seleccionar" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -478,7 +478,7 @@
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
-                                          <Label text="Fecha:">
+                                          <Label text="Fecha venta:">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -502,40 +502,86 @@
                         </GridPane>
                         <HBox alignment="CENTER_RIGHT" spacing="20.0">
                            <children>
-                              <Button fx:id="btnSell" mnemonicParsing="false" onAction="#btnSell" styleClass="btnForm" text="Vender" textFill="WHITE">
-                                 <graphic>
-                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@images/btnLogo/logoSell.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <Button mnemonicParsing="false" onAction="#btnDeleteSell" styleClass="btnForm" text="Eliminar Venta" textFill="WHITE">
-                                 <graphic>
-                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@images/btnLogo/delete.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
+                              <GridPane HBox.hgrow="ALWAYS">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints />
+                                </rowConstraints>
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="20.0">
+                                       <children>
+                                          <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#btnSearch" styleClass="btnForm" text="Bodega/Buscar" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/btnLogo/logoSearch.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#btnCancel" styleClass="btnForm" text="Anular" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/btnLogo/logoX.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_RIGHT" spacing="20.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Button fx:id="btnSell" mnemonicParsing="false" onAction="#btnSell" styleClass="btnForm" text="Vender" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/btnLogo/logoSell.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#btnDeleteSell" styleClass="btnForm" text="Limpiar Venta" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/btnLogo/delete.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
                            </children>
-                           <padding>
-                              <Insets left="70.0" />
-                           </padding>
                         </HBox>
                      </children>
                   </VBox>

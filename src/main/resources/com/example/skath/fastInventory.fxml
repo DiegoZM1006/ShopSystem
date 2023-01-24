@@ -15,10 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.skath.controller.FastInventoryController">
    <children>
-      <VBox layoutX="10.0" layoutY="10.0" prefHeight="668.0" spacing="20.0">
+      <VBox layoutX="10.0" layoutY="10.0" spacing="20.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -142,7 +141,7 @@
                   </HBox>
                </children>
             </HBox>
-            <TableView fx:id="table" prefWidth="1126.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="table" maxHeight="350.0" prefWidth="1126.0" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="ID" prefWidth="100.0" text="ID" />
                   <TableColumn fx:id="storage" prefWidth="150.0" text="Almacen" />
