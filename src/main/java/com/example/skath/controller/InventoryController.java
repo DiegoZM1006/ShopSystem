@@ -257,9 +257,8 @@ public class InventoryController implements Initializable {
 
             if(result == 1) {
                 Alerts.info("Registro agregado", "El registro fue EXITOSAMENTE agregado");
-
-                btnShowWindow("inventory.fxml", "Inventario");
-
+                callData();
+                btnNew(new ActionEvent());
             } else {
                 Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se guardo");
             }
@@ -296,11 +295,9 @@ public class InventoryController implements Initializable {
             int result = pstmt.executeUpdate();
 
             if(result == 1) {
-
                 Alerts.info("Registro actualizado", "El registro fue EXITOSAMENTE actualizado");
-
-                btnShowWindow("inventory.fxml", "Inventario");
-
+                callData();
+                btnNew(new ActionEvent());
             } else {
                 Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se actualizo");
             }
@@ -326,11 +323,9 @@ public class InventoryController implements Initializable {
         int result = pstmt.executeUpdate();
 
         if(result == 1) {
-
             Alerts.info("Registro eliminado", "El registro fue EXITOSAMENTE eliminado");
-
-            btnShowWindow("inventory.fxml", "Inventario");
-
+            callData();
+            btnNew(new ActionEvent());
         } else {
             Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se elimino");
         }

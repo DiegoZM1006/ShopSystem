@@ -202,9 +202,8 @@ public class UsersController implements Initializable {
 
             if(result == 1) {
                 Alerts.info("Registro agregado", "El registro fue EXITOSAMENTE agregado");
-
-                btnShowWindow("users.fxml", "Usuarios");
-
+                callData();
+                btnNew(new ActionEvent());
             } else {
                 Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se guardo");
             }
@@ -239,11 +238,9 @@ public class UsersController implements Initializable {
             int result = pstmt.executeUpdate();
 
             if(result == 1) {
-
                 Alerts.info("Registro actualizado", "El registro fue EXITOSAMENTE actualizado");
-
-                btnShowWindow("users.fxml", "Usuarios");
-
+                callData();
+                btnNew(new ActionEvent());
             } else {
                 Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se actualizo");
             }
@@ -271,11 +268,9 @@ public class UsersController implements Initializable {
         cn.close();
 
         if(result == 1) {
-
             Alerts.info("Registro eliminado", "El registro fue EXITOSAMENTE eliminado");
-
-            btnShowWindow("users.fxml", "Usuarios");
-
+            callData();
+            btnNew(new ActionEvent());
         } else {
             Alerts.error("Error", "Ha ocurrido un error inesperado en el sistema, el registro NO se elimino");
         }
