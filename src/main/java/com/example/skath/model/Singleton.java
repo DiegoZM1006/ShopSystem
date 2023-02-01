@@ -18,6 +18,9 @@ public class Singleton {
     private Product productToFastProduct;
     private ObservableList<Product> obsProducts;
     private double totalPayment;
+    private boolean theSaleWasMade = false;
+
+    private Integer idSalesDetail;
 
     private Singleton() {
         isSideBarCollapsed = false;
@@ -115,4 +118,21 @@ public class Singleton {
     public void setTotalPayment(double totalPayment) {
         this.totalPayment = totalPayment;
     }
+
+    public boolean isTheSaleWasMade() {
+        return theSaleWasMade;
+    }
+
+    public void setTheSaleWasMade(boolean theSaleWasMade) {
+        this.theSaleWasMade = theSaleWasMade;
+    }
+
+    public Integer getIdSalesDetail() {
+        return idSalesDetail;
+    }
+
+    public void setIdSalesDetail(Integer idSalesDetail) {
+        this.idSalesDetail = idSalesDetail;
+    }
+
 }
