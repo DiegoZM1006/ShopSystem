@@ -129,9 +129,6 @@ public class SaleConfirmationController implements Initializable {
 
                 // Establecemos la conexion
                 cn = Singleton.getInstance().getCn();
-                // LocalDate date = LocalDate.now();
-                // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-                // System.out.println(formatter.format(date));
                 long millis = System.currentTimeMillis();
                 java.sql.Date date = new java.sql.Date(millis);
 
@@ -143,7 +140,7 @@ public class SaleConfirmationController implements Initializable {
                 pstmtToSales.setDate(4, date);
                 int resultToSales = pstmtToSales.executeUpdate();
 
-                if(resultToSales > 0) {
+                if(resultToSales == 1) {
 
                     String queryKnowLastSale = "SELECT count(*) as TOTAL FROM SALES";
                     PreparedStatement pstmtKnowLastSale = cn.prepareStatement(queryKnowLastSale);
@@ -166,11 +163,26 @@ public class SaleConfirmationController implements Initializable {
 
                         if(resultToSalesDetail < 0) {
                             Alerts.error("Error en venta", "El producto " + p.getDescription() + " no se pudo vender");
+                        } else {
+
+                            String queryKnowAmount = "SELECT amount FROM product WHERE ID = ?";
+                            PreparedStatement pstmtKnowAmount = cn.prepareStatement(queryKnowAmount);
+                            pstmtKnowAmount.setInt(1, p.getID());
+                            ResultSet resultKnowAmount = pstmtKnowAmount.executeQuery();
+                            resultKnowAmount.next();
+
+                            String queryUpdateInventory = "UPDATE product SET amount = ? WHERE ID = ?";
+                            PreparedStatement pstmtUpdateInventory = cn.prepareStatement(queryUpdateInventory);
+                            pstmtUpdateInventory.setInt(1, resultKnowAmount.getInt("amount") - p.getAmount());
+                            pstmtUpdateInventory.setInt(2, p.getID());
+                            int resultUpdateInventory = pstmtUpdateInventory.executeUpdate();
+
                         }
 
                     }
 
                     Alerts.info("Venta realizada", "La venta se realizo");
+                    Singleton.getInstance().setTheSaleWasMade(true);
 
                     Stage currentStage = (Stage) table.getScene().getWindow();
                     currentStage.hide();
@@ -184,14 +196,63 @@ public class SaleConfirmationController implements Initializable {
 
             } else if(paymentMth.getValue().equalsIgnoreCase("Credito")) {
 
+                if(obsProducts.size() == 1 && obsProducts.get(0).getAmount() == 1) {
 
+                    cn = Singleton.getInstance().getCn();
+                    Product p = obsProducts.get(0);
+
+                    String queryToCredit = "INSERT INTO credit (ID_CLIENT, ID_PRODUCT, AMOUNT) values (?, ?, ?)";
+                    PreparedStatement pstmtToCredit = cn.prepareStatement(queryToCredit);
+                    pstmtToCredit.setInt(1, Singleton.getInstance().getClientToFastClient().getID());
+                    pstmtToCredit.setInt(2, p.getID());
+                    pstmtToCredit.setInt(3, 1);
+                    int resultToCredit = pstmtToCredit.executeUpdate();
+
+                    if(resultToCredit == 1) {
+
+                        long millis = System.currentTimeMillis();
+                        java.sql.Date date = new java.sql.Date(millis);
+
+                        String queryToKnowLastCredit = "SELECT count(*) as TOTAL FROM credit";
+                        PreparedStatement pstmtToKnowLastCredit = cn.prepareStatement(queryToKnowLastCredit);
+                        ResultSet resultToKnowLastCredit = pstmtToKnowLastCredit.executeQuery();
+                        resultToKnowLastCredit.next();
+
+                        String queryToCreditDate = "INSERT INTO credit_date (ID_USER, ID_CREDIT, PAY, PAYABLE, TOTAL, DATE) values (?, ?, ?, ?, ?, ?)";
+                        PreparedStatement pstmtToCreditDate = cn.prepareStatement(queryToCreditDate);
+                        pstmtToCreditDate.setInt(1, Singleton.getInstance().getUser().getID());
+                        pstmtToCreditDate.setInt(2, resultToKnowLastCredit.getInt("TOTAL"));
+                        pstmtToCreditDate.setDouble(3, Double.parseDouble(moneyReceived.getText()));
+                        pstmtToCreditDate.setDouble(4, p.getPrice() - Double.parseDouble(moneyReceived.getText()));
+                        pstmtToCreditDate.setDouble(5, p.getPrice());
+                        pstmtToCreditDate.setDate(6, date);
+                        int resultToCreditDate = pstmtToCreditDate.executeUpdate();
+
+                        if(resultToCreditDate == 1) {
+                            Alerts.info("Credito realizado", "El credito fue realizado");
+                            Singleton.getInstance().setTheSaleWasMade(true);
+                            Stage currentStage = (Stage) table.getScene().getWindow();
+                            currentStage.hide();
+                        } else {
+                            Alerts.error("Error", "El credito NO se realizo");
+                        }
+
+
+                    } else {
+                        Alerts.error("Error", "El credito no se pudo realizar");
+                    }
+
+                } else {
+                    Alerts.error(
+                            "Error",
+                            "Para hacer un credito ten en cuenta lo siguiente: \n 1. Solo puede ser un producto \n 2. La cantidad de ese producto debe ser uno");
+
+                }
 
             }
 
         } else {
-
             Alerts.error("Error", "Rellena la forma de pago");
-
         }
 
     }
