@@ -513,7 +513,7 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" spacing="20.0">
                                        <children>
-                                          <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#btnSearch" styleClass="btnForm" text="Bodega/Buscar" textFill="WHITE">
+                                          <Button fx:id="btnSearchCellar" mnemonicParsing="false" onAction="#btnSearchCellar" styleClass="btnForm" text="Bodega/Buscar" textFill="WHITE">
                                              <graphic>
                                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -528,11 +528,11 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#btnCancel" styleClass="btnForm" text="Anular" textFill="WHITE">
+                                          <Button fx:id="btnSearchSales" mnemonicParsing="false" onAction="#btnSearchSales" styleClass="btnForm" text="Ventas/Buscar" textFill="WHITE">
                                              <graphic>
                                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@images/btnLogo/logoX.png" />
+                                                      <Image url="@images/btnLogo/logoSearch.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>

@@ -57,6 +57,12 @@ public class SellController implements Initializable {
     // Form buttons
 
     @FXML
+    private Button btnSearchCellar;
+
+    @FXML
+    private Button btnSearchSales;
+
+    @FXML
     private Button btnAddProduct;
 
     @FXML
@@ -127,7 +133,7 @@ public class SellController implements Initializable {
         // Sale information
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        currentDate.setText(String.valueOf(formatter.format(date)));
+        currentDate.setText(formatter.format(date));
         vendorSelected.setText(Singleton.getInstance().getUser().getName() + " " + Singleton.getInstance().getUser().getLastName());
 
         manageEvents();
@@ -482,7 +488,10 @@ public class SellController implements Initializable {
 
             Singleton.getInstance().closeCn();
 
-            btnDeleteSell(new ActionEvent());
+            if (Singleton.getInstance().isTheSaleWasMade()) {
+                btnDeleteSell(new ActionEvent());
+                Singleton.getInstance().setTheSaleWasMade(false);
+            }
 
         } else {
 
@@ -517,6 +526,35 @@ public class SellController implements Initializable {
         obsProducts.clear();
 
         total.setText("0.0");
+
+    }
+
+    @FXML
+    void btnSearchSales(ActionEvent event) {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainApplication.class.getResource("sales.fxml")
+            );
+            Parent node = fxmlLoader.load();
+            Scene scene = new Scene(node);
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("Ventas realizadas");
+            window.setResizable(false);
+            window.setMaximized(false);
+            window.setScene(scene);
+            window.showAndWait();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void btnSearchCellar(ActionEvent event) {
+
+
 
     }
 
