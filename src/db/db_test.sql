@@ -34,7 +34,8 @@ CREATE TABLE `CREDIT` (
     `ID` int(11) NOT NULL,
     `ID_CLIENT` int(11) NOT NULL,
     `ID_PRODUCT` int(11) NOT NULL,
-    `AMOUNT` int(11) NOT NULL
+    `AMOUNT` int(11) NOT NULL,
+    `DATE` date NOT NULL
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci ;
 
 CREATE TABLE `CREDIT_DATE` (
@@ -75,8 +76,11 @@ CREATE TABLE `SALES` (
     `ID` int(11) NOT NULL,
     `ID_CLIENT` int(11) NOT NULL,
     `ID_USER` int(11) NOT NULL,
+    `RECEIVED` double(10, 2) NOT NULL,
+    `RETURNED` double(10, 2) NOT NULL,
     `TOTAL` double(10, 2) NOT NULL,
-    `DATE` date NOT NULL
+    `DATE` date NOT NULL,
+    `TIME` time NOT NULL
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci ;
 
 CREATE TABLE `SALES_DETAIL` (
