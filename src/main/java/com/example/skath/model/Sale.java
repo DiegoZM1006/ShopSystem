@@ -1,25 +1,29 @@
 package com.example.skath.model;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-
+import java.sql.Time;
 import java.util.Date;
 
-public class Sales {
+public class Sale {
 
     private int ID;
     private String client;
     private String user;
+    private double received;
+    private double returned;
     private double total;
     private Date date;
 
-    public Sales(int ID, String client, String user, double total, Date date) {
+    private Time time;
+
+    public Sale(int ID, String client, String user, double received, double returned, double total, Date date, Time time) {
         this.ID = ID;
         this.client = client;
         this.user = user;
+        this.received = received;
+        this.returned = returned;
         this.total = total;
         this.date = date;
+        this.time = time;
     }
 
     public int getID() {
@@ -62,4 +66,27 @@ public class Sales {
         this.date = date;
     }
 
+    public double getReceived() {
+        return received;
+    }
+
+    public void setReceived(double received) {
+        this.received = received;
+    }
+
+    public double getReturned() {
+        return returned;
+    }
+
+    public void setReturned(double returned) {
+        this.returned = returned;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
 }
