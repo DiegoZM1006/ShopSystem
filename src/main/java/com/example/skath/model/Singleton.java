@@ -19,8 +19,9 @@ public class Singleton {
     private ObservableList<Product> obsProducts;
     private double totalPayment;
     private boolean theSaleWasMade = false;
-
     private Integer idSalesDetail;
+    private Integer idCreditsDetail;
+
 
     private Singleton() {
         isSideBarCollapsed = false;
@@ -135,4 +136,11 @@ public class Singleton {
         this.idSalesDetail = idSalesDetail;
     }
 
+    public Integer getIdCreditsDetail() {
+        return idCreditsDetail;
+    }
+
+    public void setIdCreditsDetail(Integer idCreditsDetail) {
+        this.idCreditsDetail = idCreditsDetail;
+    }
 }
