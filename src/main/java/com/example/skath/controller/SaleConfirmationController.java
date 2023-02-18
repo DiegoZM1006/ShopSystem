@@ -124,20 +124,24 @@ public class SaleConfirmationController implements Initializable {
 
             if(
                     paymentMth.getValue().equalsIgnoreCase("Contado")
-                    && Double.parseDouble(exchange.getText()) == 0
+                    && Double.parseDouble(exchange.getText()) >= 0
             ) {
 
                 // Establecemos la conexion
                 cn = Singleton.getInstance().getCn();
                 long millis = System.currentTimeMillis();
                 java.sql.Date date = new java.sql.Date(millis);
+                java.sql.Time time = new java.sql.Time(millis);
 
-                String queryToSales = "INSERT INTO sales (ID_CLIENT, ID_USER, TOTAL, DATE) values(?, ?, ?, ?)";
+                String queryToSales = "INSERT INTO sales (ID_CLIENT, ID_USER, RECEIVED, RETURNED, TOTAL, DATE, TIME) values(?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement pstmtToSales = cn.prepareStatement(queryToSales);
                 pstmtToSales.setInt(1, Singleton.getInstance().getClientToFastClient().getID());
                 pstmtToSales.setInt(2, Singleton.getInstance().getUser().getID());
-                pstmtToSales.setDouble(3, Double.parseDouble(total.getText()));
-                pstmtToSales.setDate(4, date);
+                pstmtToSales.setDouble(3, Double.parseDouble(moneyReceived.getText()));
+                pstmtToSales.setDouble(4, Double.parseDouble(exchange.getText()));
+                pstmtToSales.setDouble(5, Double.parseDouble(total.getText()));
+                pstmtToSales.setDate(6, date);
+                pstmtToSales.setTime(7, time);
                 int resultToSales = pstmtToSales.executeUpdate();
 
                 if(resultToSales == 1) {
@@ -201,27 +205,26 @@ public class SaleConfirmationController implements Initializable {
                     cn = Singleton.getInstance().getCn();
                     Product p = obsProducts.get(0);
 
-                    String queryToCredit = "INSERT INTO credit (ID_CLIENT, ID_PRODUCT, AMOUNT) values (?, ?, ?)";
+                    long millis = System.currentTimeMillis();
+                    java.sql.Date date = new java.sql.Date(millis);
+
+                    String queryToCredit = "INSERT INTO credit (ID_CLIENT, ID_PRODUCT, AMOUNT, DATE) values (?, ?, ?, ?)";
                     PreparedStatement pstmtToCredit = cn.prepareStatement(queryToCredit);
                     pstmtToCredit.setInt(1, Singleton.getInstance().getClientToFastClient().getID());
                     pstmtToCredit.setInt(2, p.getID());
                     pstmtToCredit.setInt(3, 1);
+                    pstmtToCredit.setDate(4, date);
                     int resultToCredit = pstmtToCredit.executeUpdate();
 
                     if(resultToCredit == 1) {
 
-                        long millis = System.currentTimeMillis();
-                        java.sql.Date date = new java.sql.Date(millis);
-
-                        String queryToKnowLastCredit = "SELECT count(*) as TOTAL FROM credit";
-                        PreparedStatement pstmtToKnowLastCredit = cn.prepareStatement(queryToKnowLastCredit);
-                        ResultSet resultToKnowLastCredit = pstmtToKnowLastCredit.executeQuery();
-                        resultToKnowLastCredit.next();
+                        ResultSet rs = pstmtToCredit.executeQuery("SELECT @@IDENTITY AS lastID");
+                        rs.next();
 
                         String queryToCreditDate = "INSERT INTO credit_date (ID_USER, ID_CREDIT, PAY, PAYABLE, TOTAL, DATE) values (?, ?, ?, ?, ?, ?)";
                         PreparedStatement pstmtToCreditDate = cn.prepareStatement(queryToCreditDate);
                         pstmtToCreditDate.setInt(1, Singleton.getInstance().getUser().getID());
-                        pstmtToCreditDate.setInt(2, resultToKnowLastCredit.getInt("TOTAL"));
+                        pstmtToCreditDate.setInt(2, rs.getInt("lastID"));
                         pstmtToCreditDate.setDouble(3, Double.parseDouble(moneyReceived.getText()));
                         pstmtToCreditDate.setDouble(4, p.getPrice() - Double.parseDouble(moneyReceived.getText()));
                         pstmtToCreditDate.setDouble(5, p.getPrice());
