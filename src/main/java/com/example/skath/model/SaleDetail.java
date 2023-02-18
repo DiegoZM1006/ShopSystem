@@ -1,6 +1,6 @@
 package com.example.skath.model;
 
-public class SalesDetail {
+public class SaleDetail {
 
     private int ID;
     private int idProduct;
@@ -10,7 +10,7 @@ public class SalesDetail {
     private double price;
     private double totalPrice;
 
-    public SalesDetail(int ID, int idProduct, String nameProduct, int idSales, int amount, double price, double totalPrice) {
+    public SaleDetail(int ID, int idProduct, String nameProduct, int idSales, int amount, double price, double totalPrice) {
         this.ID = ID;
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
