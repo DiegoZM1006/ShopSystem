@@ -2,8 +2,7 @@ package com.example.skath.controller;
 
 import com.example.skath.MainApplication;
 import com.example.skath.model.Alerts;
-import com.example.skath.model.Sales;
-import com.example.skath.model.SalesDetail;
+import com.example.skath.model.Sale;
 import com.example.skath.model.Singleton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,12 +20,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SalesController implements Initializable {
-
 
     @FXML
     private Button btnDelete;
@@ -38,32 +34,41 @@ public class SalesController implements Initializable {
     private Button btnShow;
 
     @FXML
-    private TableColumn<Sales, String> clientName;
+    private TableColumn<Sale, String> clientName;
 
     @FXML
-    private TableColumn<Sales, Date> saleDate;
+    private TableColumn<Sale, Date> saleDate;
 
     @FXML
-    private TableColumn<Sales, Integer> id;
+    private TableColumn<Sale, Time> time;
+
+    @FXML
+    private TableColumn<Sale, Integer> id;
+
+    @FXML
+    private TableColumn<Sale, Double> received;
+
+    @FXML
+    private TableColumn<Sale, Double> returned;
 
     @FXML
     private TextField idTF;
 
     @FXML
-    private TableView<Sales> table;
+    private TableView<Sale> table;
 
     @FXML
-    private TableColumn<Sales, Double> total;
+    private TableColumn<Sale, Double> total;
 
     @FXML
-    private TableColumn<Sales, String> userName;
+    private TableColumn<Sale, String> userName;
 
     @FXML
     private DatePicker date;
 
     private Connection cn;
 
-    private ObservableList<Sales> sales = FXCollections.observableArrayList();
+    private ObservableList<Sale> sales = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -182,7 +187,7 @@ public class SalesController implements Initializable {
 
         cn = Singleton.getInstance().getCn();
 
-        String query = "SELECT S.ID as FOLIO, C.NAME as CLIENTNAME, U.NAME as USERNAME, S.TOTAL as TOTAL, S.DATE as DATE " +
+        String query = "SELECT S.ID as FOLIO, C.NAME as CLIENTNAME, U.NAME as USERNAME, S.RECEIVED as RECEIVED, S.RETURNED as RETURNED, S.TOTAL as TOTAL, S.DATE as DATE, S.TIME as TIME " +
                 "FROM sales as S inner join client as C inner join user as U " +
                 "ON S.ID_CLIENT = C.ID AND S.ID_USER = U.ID " +
                 "WHERE 1 = 1";
@@ -197,12 +202,15 @@ public class SalesController implements Initializable {
 
         while (result.next()) {
 
-            sales.add(new Sales(
+            sales.add(new Sale(
                     result.getInt("FOLIO"),
                     result.getString("CLIENTNAME"),
                     result.getString("USERNAME"),
+                    result.getDouble("RECEIVED"),
+                    result.getDouble("RETURNED"),
                     result.getDouble("TOTAL"),
-                    result.getDate("DATE")
+                    result.getDate("DATE"),
+                    result.getTime("TIME")
             ));
 
         }
@@ -210,8 +218,11 @@ public class SalesController implements Initializable {
         id.setCellValueFactory(new PropertyValueFactory<>("ID"));
         clientName.setCellValueFactory(new PropertyValueFactory<>("client"));
         userName.setCellValueFactory(new PropertyValueFactory<>("user"));
+        received.setCellValueFactory(new PropertyValueFactory<>("received"));
+        returned.setCellValueFactory(new PropertyValueFactory<>("returned"));
         total.setCellValueFactory(new PropertyValueFactory<>("total"));
         saleDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        time.setCellValueFactory(new PropertyValueFactory<>("time"));
 
         table.setItems(sales);
 

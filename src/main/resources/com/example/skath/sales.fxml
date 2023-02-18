@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefWidth="1000.0" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.skath.controller.SalesController">
    <children>
       <VBox layoutX="20.0" layoutY="20.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -86,11 +85,14 @@
             </HBox>
             <TableView fx:id="table" maxHeight="350.0" maxWidth="1000.0" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="id" prefWidth="150.0" text="ID/Folio" />
-                  <TableColumn fx:id="clientName" prefWidth="280.0" text="Nombre Cliente" />
-                  <TableColumn fx:id="userName" prefWidth="280.0" text="Nombre Vendedor" />
-                  <TableColumn fx:id="total" prefWidth="125.0" text="Total" />
-                  <TableColumn fx:id="saleDate" prefWidth="123.0" text="Fecha" />
+                  <TableColumn fx:id="id" prefWidth="60.0" text="ID/Folio" />
+                  <TableColumn fx:id="clientName" prefWidth="200.0" text="Nombre Cliente" />
+                  <TableColumn fx:id="userName" prefWidth="200.0" text="Nombre Vendedor" />
+                  <TableColumn fx:id="received" prefWidth="100.0" text="Recibido" />
+                  <TableColumn fx:id="returned" prefWidth="100.0" text="Devuelto" />
+                  <TableColumn fx:id="total" prefWidth="100.0" text="Total" />
+                  <TableColumn fx:id="saleDate" prefWidth="100.0" text="Fecha" />
+                  <TableColumn fx:id="time" prefWidth="98.0" text="Hora" />
                </columns>
             </TableView>
             <HBox alignment="CENTER_RIGHT" spacing="20.0">
