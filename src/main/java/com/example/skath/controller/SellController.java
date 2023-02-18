@@ -554,7 +554,22 @@ public class SellController implements Initializable {
     @FXML
     void btnSearchCellar(ActionEvent event) {
 
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainApplication.class.getResource("cellar.fxml")
+            );
+            Parent node = fxmlLoader.load();
+            Scene scene = new Scene(node);
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("Creditos realizados");
+            window.setResizable(false);
+            window.setMaximized(false);
+            window.setScene(scene);
+            window.showAndWait();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
 
     }
 
