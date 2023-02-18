@@ -1,7 +1,7 @@
 package com.example.skath.controller;
 
 import com.example.skath.model.Alerts;
-import com.example.skath.model.SalesDetail;
+import com.example.skath.model.SaleDetail;
 import com.example.skath.model.Singleton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,24 +23,24 @@ import java.util.ResourceBundle;
 public class SalesDetailController implements Initializable {
 
     @FXML
-    private TableColumn<SalesDetail, Integer> amount;
+    private TableColumn<SaleDetail, Integer> amount;
 
     @FXML
     private Button btnDelete;
 
     @FXML
-    private TableColumn<SalesDetail, Double> priceT;
+    private TableColumn<SaleDetail, Double> priceT;
 
     @FXML
-    private TableColumn<SalesDetail, Double> priceU;
+    private TableColumn<SaleDetail, Double> priceU;
 
     @FXML
-    private TableColumn<SalesDetail, String> product;
+    private TableColumn<SaleDetail, String> product;
 
     @FXML
-    private TableView<SalesDetail> table;
+    private TableView<SaleDetail> table;
 
-    private ObservableList<SalesDetail> salesDetail = FXCollections.observableArrayList();
+    private ObservableList<SaleDetail> saleDetail = FXCollections.observableArrayList();
 
     private Connection cn;
 
@@ -70,7 +70,7 @@ public class SalesDetailController implements Initializable {
 
         while (result.next()) {
 
-            salesDetail.add(new SalesDetail(
+            saleDetail.add(new SaleDetail(
                     result.getInt("SD.ID"),
                     result.getInt("SD.ID_PRODUCT"),
                     result.getString("P.DESCRIPTION"),
@@ -87,7 +87,7 @@ public class SalesDetailController implements Initializable {
         priceU.setCellValueFactory(new PropertyValueFactory<>("price"));
         priceT.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 
-        table.setItems(salesDetail);
+        table.setItems(saleDetail);
 
         Singleton.getInstance().closeCn();
 
@@ -110,7 +110,7 @@ public class SalesDetailController implements Initializable {
 
         cn = Singleton.getInstance().getCn();
 
-        SalesDetail productToDelete = table.getSelectionModel().getSelectedItem();
+        SaleDetail productToDelete = table.getSelectionModel().getSelectedItem();
 
         String queryToDelete = "DELETE FROM sales_detail WHERE ID = ?";
         PreparedStatement pstmtToDelete = cn.prepareStatement(queryToDelete);
@@ -135,7 +135,7 @@ public class SalesDetailController implements Initializable {
 
                 double total = 0;
 
-                for(SalesDetail sd : salesDetail) {
+                for(SaleDetail sd : saleDetail) {
                     if(sd.getID() != productToDelete.getID()) total += sd.getTotalPrice();
                 }
 
@@ -155,12 +155,12 @@ public class SalesDetailController implements Initializable {
                 Alerts.error("Error", "Ha ocurrido un error en el sistema la cantidad del producto vendido no fue regresado al inventario");
             }
 
-            salesDetail.clear();
+            saleDetail.clear();
             callData();
 
             cn = Singleton.getInstance().getCn();
 
-            if(salesDetail.size() == 0) {
+            if(saleDetail.size() == 0) {
 
                 String queryToDeleteSales =  "DELETE FROM sales WHERE ID = ?";
                 PreparedStatement pstmtToDeleteSales = cn.prepareStatement(queryToDeleteSales);
